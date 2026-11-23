@@ -47,3 +47,18 @@ Canvas 'weak_scaling_problem_sizes.png' {
  $axis=New-Object System.Drawing.Pen ([System.Drawing.Color]::Black),3;$g.DrawLine($axis,150,650,1230,650);$g.DrawLine($axis,150,120,150,650)
  $p=@(1,4,9,16);$side=@(128,256,384,512);for($i=0;$i -lt 4;$i++){$x=245+$i*250;$h=$side[$i]/512*430;$g.FillRectangle([System.Drawing.Brushes]::SteelBlue,$x,650-$h,150,$h);Text $g "$($side[$i]) x $($side[$i])" ($x-8) (660) 17;Text $g "$($p[$i]) ranks" ($x+25) 700 17};Text $g '2D configuration: approximately 128 x 128 owned cells per process.' 280 755 21 'DarkBlue'
 }
+function PendingGraph($name,$title,$x,$y,$note) {
+  Canvas $name {
+    param($g); Text $g $title 330 35 32
+    $pen=New-Object System.Drawing.Pen ([System.Drawing.Color]::Black),3;$g.DrawLine($pen,170,650,1240,650);$g.DrawLine($pen,170,140,170,650)
+    Text $g $x 650 690 22; Text $g $y 22 360 22
+    $font=[System.Drawing.Font]::new('Arial',31,[System.Drawing.FontStyle]::Bold);$brush=New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::DarkRed)
+    $g.DrawString('PENDING ACTUAL MPI MEASUREMENTS',$font,$brush,315,335);$font.Dispose();$brush.Dispose()
+    Text $g $note 280 410 20 'DarkBlue';Text $g 'Run scripts/run_all.sh, then python3 analysis/plot_results.py.' 290 745 19 'DarkRed'
+  }
+}
+PendingGraph 'strong_scaling.png' 'Strong-scaling execution time' 'Number of MPI processes' 'Execution time (seconds)' 'Fixed global grid; plot median of repeated measured runs.'
+PendingGraph 'overlap_speedup.png' 'Overlap versus blocking speedup' 'Number of MPI processes' 'Blocking time / overlap time' 'Plot 1D and 2D series using identical fixed-iteration runs.'
+PendingGraph 'decomposition_comparison.png' '1-D versus 2-D decomposition comparison' 'Number of MPI processes' 'Execution time (seconds)' 'Compare 1D and 2D on the same global grid and process count.'
+PendingGraph 'weak_scaling.png' 'Weak-scaling performance' 'Number of MPI processes' 'Execution time (seconds)' 'Keep approximately 128 x 128 owned cells per process.'
+PendingGraph 'reduction_interval_cost.png' 'Residual-check interval overhead' 'Check interval K' 'Time (seconds)' 'Compare total execution and MPI_Allreduce time for K=1,2,5,10,20.'
