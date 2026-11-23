@@ -203,16 +203,4 @@ Generate the performance graphs:
 python3 analysis/plot_results.py
 ```
 
-## 11. Team Members
 
-| Name | USN |
-|---|---|
-| Abhijith | 1MS23CS009 |
-| Basava | 1MS23CS036 |
-| Darshan | 1MS23CS048 |
-
----
-
-**Project:** MPI Stencil with Cartesian Topology  
-**Subject:** Multicore Architecture and Programming  
-**Problem ID:** 26
