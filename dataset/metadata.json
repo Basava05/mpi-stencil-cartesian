@@ -1,0 +1,1 @@
+{"kind":"SYNTHETIC","units":"arbitrary temperature units","formula":"100*exp(-((x-0.30)^2+(y-0.35)^2)/0.012)+65*exp(-((x-0.72)^2+(y-0.68)^2)/0.020)","boundary_conditions":"all four physical boundaries are fixed to exactly 0","generation_method":"dataset/generate_dataset.py; CSV has no header","available_shapes":[[32,32],[256,256],[512,512]]}
